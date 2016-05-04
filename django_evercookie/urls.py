@@ -7,8 +7,8 @@ except ImportError:
 
 
 urlpatterns = patterns('django_evercookie.views',
-    url(r'^ecache', 'evercookie_cache', name='ecache'),
-    url(r'^epng', 'evercookie_png', name='epng'),
-    url(r'^ecetag', 'evercookie_etag', name='ecetag'),
-    url(r'^ecookie', 'evercookie_core', name='ecookie'),
-    url(r'^ecauth', 'evercookie_auth', name='ecauth'), )
+    url(r'^ec/cache', 'evercookie_cache', name='ecache'),
+    url(r'^ec/png', 'evercookie_png', name='epng'),
+    url(r'^ec/etag', 'evercookie_etag', name='ecetag'),
+    url(r'^ec/cookie', 'evercookie_core', name='ecookie'),
+    url(r'^ec/auth', 'evercookie_auth', name='ecauth'), )
