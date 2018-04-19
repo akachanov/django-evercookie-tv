@@ -1,8 +1,6 @@
 from django.conf import settings
 from django.contrib.sites.models import Site
 
-current_site = Site.objects.get_current()
-
 class Meta(type):
     def __init__(cls, *args, **kwargs):
         cls.instance = None
@@ -24,7 +22,7 @@ class Settings(object):
              history='false',
              java='false',
              silverlight='false',
-             domain='.'+current_site.domain,
+             domain=None,
              tests=10,
              base_url='',
              auth_path='false',
@@ -43,7 +41,7 @@ class Settings(object):
         self.java = java
         """ Silverlight support """
         self.silverlight = silverlight
-        self.domain = domain
+        self._domain = domain
         """ Max tries to wait / write / read swf, silverlight, png, db and java"""
         self.tests = tests
         """ Base URL for assets, this is Django's STATIC_URL """
@@ -51,5 +49,12 @@ class Settings(object):
         self.auth_path = auth_path
         self.static_url = static_url
         self.cookie_value = cookie_value
+    
+    @property
+    def domain(self):
+        if not self._domain:
+            current_site = Site.objects.get_current()
+            self._domain = ''.join(['.', current_site.domain])
+        return self._domain
 
 settings = Settings()
