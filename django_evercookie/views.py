@@ -15,6 +15,8 @@ from django_evercookie.config import settings
 @dont_vary_on('Cookie', 'Host')
 @cookie_exists(settings.cache_cookie_name)
 def evercookie_cache(request):
+    if not request.is_ajax():
+        return HttpResponse()
 
     cookie = request.COOKIES[settings.cache_cookie_name]
     response = HttpResponse(content=cookie, content_type='text/html; charset=UTF-8')
@@ -27,6 +29,8 @@ def evercookie_cache(request):
 
 @dont_vary_on('Cookie', 'Host')
 def evercookie_etag(request):
+    if not request.is_ajax():
+        return HttpResponse()
 
     if settings.etag_cookie_name not in request.COOKIES:
         if 'HTTP_IF_NONE_MATCH' not in request.META:
