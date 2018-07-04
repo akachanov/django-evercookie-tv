@@ -1,11 +1,13 @@
 from setuptools import setup, find_packages
 
-requirements = [l.strip() for l in open('requirements.txt').readlines()]
-
 setup(
      name='django_evercookie',
      version='0.1',
-     install_requires = requirements,
+     install_requires = [
+          'Django>=1.5',
+          'Pillow >= 2.0.0',
+          'django-dont-vary-on==0.1.1',
+     ],
      packages = find_packages(),
      include_package_data = True, 
      author = 'Alexey Haidamaka',
